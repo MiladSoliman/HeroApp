@@ -75,7 +75,11 @@ class HomeCollectionViewController: UICollectionViewController,UICollectionViewD
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Hello")
+        print(indexPath.row)
+        let leaguesSC = storyboard?.instantiateViewController(identifier: "LeaguesScreen") as! LeaguesViewController
+        leaguesSC.sportNum = indexPath.row
+        
+        self.navigationController?.pushViewController(leaguesSC, animated: true)
     }
     
     
@@ -86,8 +90,8 @@ class HomeCollectionViewController: UICollectionViewController,UICollectionViewD
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return true
-    }
-    */
+    }*/
+    
 
     /*
     // Uncomment this method to specify if the specified item should be selected

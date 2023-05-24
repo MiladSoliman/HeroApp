@@ -15,13 +15,9 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-       /* splashView.contentMode = .scaleAspectFit
-        splashView.loopMode = .loop
-        splashView.play()*/
+     
         let animationView = LottieAnimationView(name: "splash")
-      //  let animationView = LottiAnimationView(name: "your_animation_file_name")
-       // animationView.frame = CGRect(x: 10, y: 400, width: 200, height: 200)
+     
         animationView.center = splashView.center
         splashView.addSubview(animationView)
        
@@ -36,13 +32,11 @@ class SplashViewController: UIViewController {
         }
         
         
-       /* Timer.scheduledTimer(timeInterval: 5, target: self, @selector: @selector(changeScreen), userInfo: nil, repeats: false)*/
+    
         
     }
     
-    func changeScreen(){
-        
-    }
+  
     
 
     /*
