@@ -107,7 +107,7 @@ class LeagueDetalisPressenter {
                 let teamTwoName = data.event_away_team
                 let teamOneImg = data.event_home_team_logo
                 let teamTwoImg = data.event_away_team_logo
-                let result = data.event_home_final_result! + data.even_away_final_result!
+                let result = data.event_home_final_result! ?? "0" + data.even_away_final_result! ?? "0"
                 
                 let leagueView = LeagueDetalisView(name1: teamOneName ?? "" , name2: teamTwoName ?? "" , img1: teamOneImg ?? "" , img2: teamTwoImg ?? "", time: time ?? "", date: date ?? "", result: result )
                 
@@ -199,7 +199,7 @@ class LeagueDetalisPressenter {
                 let teamTwoName = result.event_away_team
                 let teamOneImg = result.event_home_team_logo
                 let teamTwoImg = result.event_away_team_logo
-                let result = result.event_home_final_result! + result.even_away_final_result!
+                let result = result.event_home_final_result! ?? "0" + result.even_away_final_result! ?? "0"
                 
                 let leagueView = LeagueDetalisView(name1: teamOneName ?? "" , name2: teamTwoName ?? "" , img1: teamOneImg ?? "" , img2: teamTwoImg ?? "", time: time ?? "", date: date ?? "", result: result )
                 
