@@ -13,8 +13,8 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var teamColliction: UICollectionView!
     @IBOutlet weak var resultTable: UITableView!
     @IBOutlet weak var upcomingColliction: UICollectionView!
-    var events : [EventsData] = []
-    var results : [EventsData] = []
+    var events : [LeagueDetalisView] = []
+    var results : [LeagueDetalisView] = []
     var teams : [Team] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,27 +24,26 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         resultTable.dataSource = self
         teamColliction.dataSource = self
         teamColliction.delegate = self
-    //    presenter = LeagueDetalisPressenter()
         presenter.attachView(view: self)
         presenter.getUpComingEvents()
         presenter.getLastResults()
         presenter.getTeams()
         
     }
-    func updateUpComingColl(events: [EventsData]) {
+    func updateUpComingColl(events: [LeagueDetalisView]) {
         self.events = events
         DispatchQueue.main.async {
             self.upcomingColliction.reloadData()
         }
-        print(events[0].event_away_team!) // real madrid
+       // print(events[0].event_away_team!) // real madrid
     }
     
-    func updateResultTable(results: [EventsData]) {
+    func updateResultTable(results: [LeagueDetalisView]) {
         self.results = results
         DispatchQueue.main.async {
             self.resultTable.reloadData()
         }
-        print(results[0].event_final_result!) // 4-0
+      //  print(results[0].event_final_result!) // 4-0
     }
     
     func updateTeamsColl(teams: [Team]) {
@@ -52,7 +51,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         DispatchQueue.main.async {
             self.teamColliction.reloadData()
         }
-        print(teams[0].team_name!) // Byern
+      //  print(teams[0].team_name!) // Byern
     }
 
     
@@ -73,23 +72,23 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         if collectionView == upcomingColliction {
             
             let upComingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "upComingCell", for: indexPath) as! UpComingCell
-            upComingCell.teamOneImgV.sd_setImage(with: URL(string: events[indexPath.row].home_team_logo ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
-        //  upComingCell.teamOneImgV.layer.cornerRadius = upComingCell.teamOneImgV.frame.size.height / 5
-            upComingCell.teamOneName.text = events[indexPath.row].event_home_team
-            upComingCell.teamTowImgV.sd_setImage(with: URL(string: events[indexPath.row].away_team_logo ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
-         //   upComingCell.teamTowImgV.layer.cornerRadius = upComingCell.teamTowImgV.frame.size.height / 5
-            upComingCell.teamTwoName.text = events[indexPath.row].event_away_team
-            upComingCell.eventDate.text = events[indexPath.row].event_date
-            upComingCell.eventTime.text = events[indexPath.row].event_time
-            upComingCell.upcmoingCellView.layer.cornerRadius = upComingCell.frame.size.height / 5
-            //  upComingCell.layer.masksToBounds = true
+            upComingCell.teamOneImgV.sd_setImage(with: URL(string: events[indexPath.row].teamHomeImg ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
+            upComingCell.teamOneName.text = events[indexPath.row].teamHomeName
+            upComingCell.teamTowImgV.sd_setImage(with: URL(string: events[indexPath.row].teamAwatImg ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
+            upComingCell.teamTwoName.text = events[indexPath.row].teamAwayName
+            upComingCell.eventDate.text = events[indexPath.row].date
+            upComingCell.eventTime.text = events[indexPath.row].time
+           upComingCell.upcmoingCellView.layer.cornerRadius = upComingCell.frame.size.height / 5
+        
             
             return upComingCell
         }else {
             
             let teamCell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamColCell", for: indexPath) as! TeamCollectionViewCell
             teamCell.teamImageView.sd_setImage(with: URL(string: teams[indexPath.row].team_logo ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
-            teamCell.teamCellView.layer.cornerRadius = teamCell.frame.size.height / 5
+           teamCell.teamImageView.layer.cornerRadius = 50
+         //   teamCell.teamImageView.layer.borderColor = UIColor.red.cgColor
+           teamCell.teamCellView.layer.cornerRadius = teamCell.frame.size.height / 5
             return teamCell
         }
 
@@ -97,8 +96,11 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == teamColliction {
+            presenter.teamId = teams[indexPath.row].team_key
             
             let detalisSc = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
+            
+            detalisSc.teamPressenter = presenter.setTeamDetailsData()
             
             self.navigationController?.pushViewController(detalisSc, animated: true)
             
@@ -115,13 +117,15 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let resultCell = tableView.dequeueReusableCell(withIdentifier: "resultCell",for: indexPath) as! ResultCell
-        resultCell.teamOneImage.sd_setImage(with: URL(string: results[indexPath.row].home_team_logo ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
-        resultCell.teamOneName.text = results[indexPath.row].event_home_team
-        resultCell.teamTwoImage.sd_setImage(with: URL(string: results[indexPath.row].away_team_logo ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
-        resultCell.TeamTwoLable.text = results[indexPath.row].event_away_team
-        resultCell.resultDate.text = results[indexPath.row].event_date
-        resultCell.resultTime.text = results[indexPath.row].event_time
-        resultCell.scoreLable.text = results[indexPath.row].event_final_result
+        resultCell.teamOneImage.sd_setImage(with: URL(string: results[indexPath.row].teamHomeImg ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
+        resultCell.teamOneImage.layer.cornerRadius = 30
+        resultCell.teamOneName.text = results[indexPath.row].teamHomeName
+        resultCell.teamTwoImage.sd_setImage(with: URL(string: results[indexPath.row].teamAwatImg ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
+        resultCell.teamTwoImage.layer.cornerRadius = 30
+        resultCell.TeamTwoLable.text = results[indexPath.row].teamAwayName
+        resultCell.resultDate.text = results[indexPath.row].date
+        resultCell.resultTime.text = results[indexPath.row].time
+        resultCell.scoreLable.text = results[indexPath.row].result
         resultCell.resultTableView.layer.cornerRadius = resultCell.frame.size.height / 5
         
         

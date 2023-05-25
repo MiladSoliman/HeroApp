@@ -7,7 +7,7 @@
 
 import Foundation
 protocol LeagueDetailsProtocol : AnyObject {
-    func updateUpComingColl(events : [EventsData])
-    func updateResultTable(results:[EventsData])
+    func updateUpComingColl(events : [LeagueDetalisView])
+    func updateResultTable(results:[LeagueDetalisView])
     func updateTeamsColl(teams:[Team])
 }

@@ -7,26 +7,28 @@
 
 import Foundation
 
-class TeamResponse : Decodable{
-    var success:Int?
-    var result:[Team]?
+
+struct TeamDetails: Decodable {
+    let success: Int?
+    let result: [Team]?
 }
 
-class Team : Decodable {
-    var team_logo : String?
-    var team_name :String?
-    var players : [Player]?
-    var coaches : [Coach]?
-}
-
-class Player : Decodable {
-    var player_name:String?
-    var player_number:Int?
-    var player_type:String?
-    var player_image:String?
-}
-
-class Coach : Decodable{
-    var coach_name:String?
+struct Team :Decodable {
+    let team_key:Int?
+    let team_name:String?
+    let team_logo:String?
+    let players:[Player]?
+    let coaches:[Coach]?
     
+
+}
+struct Player:Decodable {
+    let player_age:String?
+    let player_image:String?
+    let player_name:String?
+    let player_number:String?
+    let player_type:String?
+}
+struct Coach:Decodable{
+    let coach_name:String?
 }
