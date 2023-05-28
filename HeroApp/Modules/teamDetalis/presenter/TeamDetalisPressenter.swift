@@ -14,6 +14,7 @@ class TeamDeatlsPressenter {
     var networkServices = NetworkService.getInstance()
     var sportName:String?
     var teamId : Int?
+    var cashingData = TeamsDataBase.getInstance()
     
     
     func setData(name:String,id:Int){
@@ -33,6 +34,11 @@ class TeamDeatlsPressenter {
 
         }
     }
+    
+    func saveToFavourite(teamName: String, imag: Data, id: Int){
+        cashingData.saveTeam(teamName: teamName, imag: imag, id: id)
+    }
+    
     
     
     

@@ -96,21 +96,21 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == teamColliction {
-            presenter.teamId = teams[indexPath.row].team_key
-            
-            let detalisSc = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
-            
-            detalisSc.teamPressenter = presenter.setTeamDetailsData()
-            
-            self.navigationController?.pushViewController(detalisSc, animated: true)
-            
+            if presenter.sportName == "football"{
+                presenter.teamId = teams[indexPath.row].team_key
+                let detalisSc = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
+                
+                detalisSc.teamPressenter = presenter.setTeamDetailsData()
+                
+                self.navigationController?.pushViewController(detalisSc, animated: true)
+            }else{
+                showAlert()
+                print("No Detalis")
+            }
         }
         
     }
-    
- 
-    
-    
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return results.count
     }
@@ -135,5 +135,16 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+    
+    
+    
+    func showAlert(){
+        let ndDataAlert : UIAlertController = UIAlertController(title: "Information", message: "Sorry There Is No Data For This Team", preferredStyle: .alert)
+        ndDataAlert.addAction(UIAlertAction(title: "Ok", style: .default))
+        
+        self.present(ndDataAlert,animated: true,completion: nil)
+        
+    }
+    
 
 }

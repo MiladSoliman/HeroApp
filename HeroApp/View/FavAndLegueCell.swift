@@ -16,7 +16,7 @@ class FavAndLegueCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.teamImgView.layer.cornerRadius = 50 //teamImgView.frame.size.width / 2
+     self.teamImgView.layer.cornerRadius = 50 //teamImgView.frame.size.width / 2
         self.teamImgView.layer.masksToBounds = true
         teamImgView.clipsToBounds = true
         

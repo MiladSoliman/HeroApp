@@ -16,22 +16,20 @@ class TeamDetalisViewController: UIViewController,UITableViewDelegate,UITableVie
     @IBOutlet weak var teamName: UILabel!
     @IBOutlet weak var teamImgView: UIImageView!
     var playes:[Player] = []
-  //  var team : [Team] = []
+    var teams : [Team] = []
     var teamPressenter : TeamDeatlsPressenter!
     override func viewDidLoad() {
         super.viewDidLoad()
         playersTable.dataSource = self
         playersTable.delegate = self
-      //  pressenter = TeamDeatlsPressenter()
+    
         teamPressenter.attachView(view: self)
         teamPressenter.getTeamDetails()
-    /*   teamName.text = "Barcelona"
-        teamCoach.text = "Xavi"
-        teamImgView.image = UIImage(named: "FootBall")*/
+
     }
 
     func UpdatePage(teams: [Team]) {
-       // self.team = teams
+        self.teams = teams
         self.playes = teams[0].players!
         DispatchQueue.main.async {
             self.teamName.text = teams[0].team_name
@@ -60,8 +58,8 @@ class TeamDetalisViewController: UIViewController,UITableViewDelegate,UITableVie
         cell.playerPostition.text = playes[indexPath.row].player_type!
         cell.playerCellView.layer.cornerRadius = cell.frame.height / 5
         cell.playerImgView.layer.cornerRadius = 50
-      //  cell.playerImgView.image.layer.
-       // cell.backgroundColor = UIColor.darkGray
+    
+        
         return cell
     }
     
@@ -70,6 +68,29 @@ class TeamDetalisViewController: UIViewController,UITableViewDelegate,UITableVie
     }
   
     @IBAction func addToFav(_ sender: UIButton) {
+        addTeamToFav()
         print("Added To Favorite")
+        showSavedAlert()
+     
     }
+    
+    
+    func addTeamToFav(){
+         if let imageData = teamImgView.image?.jpegData(compressionQuality: 1.0) ,
+            let id = teams[0].team_key ,
+             let name = teamName.text {
+             teamPressenter.saveToFavourite(teamName: name, imag: imageData, id: id)
+          }
+        
+    }
+    
+    
+    func showSavedAlert(){
+        let savedAlert : UIAlertController = UIAlertController(title: "Saving", message: "Team Saved Successfully", preferredStyle: .actionSheet)
+        savedAlert.addAction(UIAlertAction(title: "Ok", style: .default ))
+        self.present(savedAlert,animated: true,completion: nil)
+    }
+    
+    
+    
 }
