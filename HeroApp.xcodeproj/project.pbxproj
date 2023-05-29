@@ -12,6 +12,11 @@
 		082B1BB42A1A91E5003D8838 /* LeaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B1BB32A1A91E5003D8838 /* LeaguesViewController.swift */; };
 		082B1BB62A1AA6C3003D8838 /* TeamDetalisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B1BB52A1AA6C3003D8838 /* TeamDetalisViewController.swift */; };
 		082B1BB82A1AAC19003D8838 /* PlayerDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B1BB72A1AAC19003D8838 /* PlayerDetailsCell.swift */; };
+		0830B13B2A24FE8D0078B785 /* NetworkServicesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830B13A2A24FE8D0078B785 /* NetworkServicesTest.swift */; };
+		0830B13D2A252A750078B785 /* NetworkServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830B13C2A252A750078B785 /* NetworkServicesProtocol.swift */; };
+		0830B13F2A252B540078B785 /* MokeApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830B13E2A252B540078B785 /* MokeApiResponse.swift */; };
+		0830B1412A252C790078B785 /* MokeNetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830B1402A252C790078B785 /* MokeNetworkServices.swift */; };
+		0830B1432A252F3F0078B785 /* MokeNetworkServicesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830B1422A252F3F0078B785 /* MokeNetworkServicesTest.swift */; };
 		083139422A1BC9D90009D5E7 /* LeagueDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083139412A1BC9D90009D5E7 /* LeagueDetailsViewController.swift */; };
 		083139442A1BD1140009D5E7 /* UpComingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083139432A1BD1140009D5E7 /* UpComingCell.swift */; };
 		083139462A1BE7FC0009D5E7 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083139452A1BE7FB0009D5E7 /* ResultCell.swift */; };
@@ -82,6 +87,14 @@
 		082B1BB32A1A91E5003D8838 /* LeaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesViewController.swift; sourceTree = "<group>"; };
 		082B1BB52A1AA6C3003D8838 /* TeamDetalisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetalisViewController.swift; sourceTree = "<group>"; };
 		082B1BB72A1AAC19003D8838 /* PlayerDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsCell.swift; sourceTree = "<group>"; };
+		0830B13A2A24FE8D0078B785 /* NetworkServicesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesTest.swift; sourceTree = "<group>"; };
+		0830B13C2A252A750078B785 /* NetworkServicesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesProtocol.swift; sourceTree = "<group>"; };
+		0830B13E2A252B540078B785 /* MokeApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MokeApiResponse.swift; sourceTree = "<group>"; };
+		0830B1402A252C790078B785 /* MokeNetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MokeNetworkServices.swift; sourceTree = "<group>"; };
+		0830B1422A252F3F0078B785 /* MokeNetworkServicesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MokeNetworkServicesTest.swift; sourceTree = "<group>"; };
+		0830B1452A2536B50078B785 /* FootBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FootBall.png; sourceTree = "<group>"; };
+		0830B1462A2536BF0078B785 /* FootBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FootBall.png; path = ../../../../Downloads/FootBall.png; sourceTree = "<group>"; };
+		0830B1472A2536CA0078B785 /* FootBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FootBall.png; path = ../../../../Downloads/FootBall.png; sourceTree = "<group>"; };
 		083139412A1BC9D90009D5E7 /* LeagueDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailsViewController.swift; sourceTree = "<group>"; };
 		083139432A1BD1140009D5E7 /* UpComingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingCell.swift; sourceTree = "<group>"; };
 		083139452A1BE7FB0009D5E7 /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
@@ -175,6 +188,22 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		0830B1442A2536A00078B785 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				0838846E2A1FA61900B2CC33 /* playerIcon.png */,
+				0840854C2A1D41F7005009CB /* sport.png */,
+				08B44A762A196A1600A1A4FE /* Tennis.png */,
+				08B44A6E2A19682600A1A4FE /* BasketBall.png */,
+				0830B1462A2536BF0078B785 /* FootBall.png */,
+				08D168242A1977B0005F51A6 /* splash.json */,
+				0830B1472A2536CA0078B785 /* FootBall.png */,
+				08B44A782A196AC500A1A4FE /* Ckricket.png */,
+				0830B1452A2536B50078B785 /* FootBall.png */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		083ACCCF2A239C3300039133 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				08522B592A1CF79C00109EF2 /* NetworkServices.swift */,
+				0830B13C2A252A750078B785 /* NetworkServicesProtocol.swift */,
 			);
 			path = networking;
 			sourceTree = "<group>";
@@ -419,6 +449,7 @@
 		088B94B22A19434B00D5F820 /* HeroApp */ = {
 			isa = PBXGroup;
 			children = (
+				0830B1442A2536A00078B785 /* resources */,
 				08804B082A1EC2AA00404AEB /* Util */,
 				08522B6D2A1D003400109EF2 /* View */,
 				08522B5D2A1CFD7F00109EF2 /* Modules */,
@@ -427,13 +458,7 @@
 				088B94B32A19434B00D5F820 /* AppDelegate.swift */,
 				088B94B52A19434B00D5F820 /* SceneDelegate.swift */,
 				088B94BF2A19434D00D5F820 /* Assets.xcassets */,
-				0838846E2A1FA61900B2CC33 /* playerIcon.png */,
-				0840854C2A1D41F7005009CB /* sport.png */,
-				08B44A762A196A1600A1A4FE /* Tennis.png */,
-				08B44A6E2A19682600A1A4FE /* BasketBall.png */,
 				08B44A6C2A19675200A1A4FE /* FootBall.png */,
-				08D168242A1977B0005F51A6 /* splash.json */,
-				08B44A782A196AC500A1A4FE /* Ckricket.png */,
 				088B94C12A19434D00D5F820 /* LaunchScreen.storyboard */,
 				088B94C42A19434D00D5F820 /* Info.plist */,
 				088B94BC2A19434B00D5F820 /* HeroApp.xcdatamodeld */,
@@ -445,6 +470,10 @@
 			isa = PBXGroup;
 			children = (
 				088B94CD2A19434E00D5F820 /* HeroAppTests.swift */,
+				0830B13A2A24FE8D0078B785 /* NetworkServicesTest.swift */,
+				0830B13E2A252B540078B785 /* MokeApiResponse.swift */,
+				0830B1402A252C790078B785 /* MokeNetworkServices.swift */,
+				0830B1422A252F3F0078B785 /* MokeNetworkServicesTest.swift */,
 			);
 			path = HeroAppTests;
 			sourceTree = "<group>";
@@ -744,6 +773,7 @@
 				08B44A612A19547E00A1A4FE /* HomeCollectionViewController.swift in Sources */,
 				082774012A1E1F6800DED7D2 /* LeaguesView.swift in Sources */,
 				083F00A52A1E636A0032B34A /* Team.swift in Sources */,
+				0830B13D2A252A750078B785 /* NetworkServicesProtocol.swift in Sources */,
 				088B94BE2A19434B00D5F820 /* HeroApp.xcdatamodeld in Sources */,
 				083884732A1FBB1100B2CC33 /* LeagueDetailsView.swift in Sources */,
 				083ACCD62A23B5FF00039133 /* FavoriteControllerProtocol.swift in Sources */,
@@ -768,6 +798,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0830B13F2A252B540078B785 /* MokeApiResponse.swift in Sources */,
+				0830B13B2A24FE8D0078B785 /* NetworkServicesTest.swift in Sources */,
+				0830B1412A252C790078B785 /* MokeNetworkServices.swift in Sources */,
+				0830B1432A252F3F0078B785 /* MokeNetworkServicesTest.swift in Sources */,
 				088B94CE2A19434E00D5F820 /* HeroAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

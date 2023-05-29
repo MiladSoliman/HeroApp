@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-class NetworkService {
+class NetworkService : NetworkServiceProtocol {
     private static var sharedInstance = NetworkService()
   
      static func getInstance() -> NetworkService {
