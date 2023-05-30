@@ -18,12 +18,17 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         favoriteTable.delegate = self
         favoriteTable.dataSource = self
         favoriteTable.register(UINib(nibName: "FavAndLegueCell", bundle: nil), forCellReuseIdentifier: "FavAndLeageCell")
+       
         favPresenter = FavoritePressenter()
         favPresenter.attachView(view: self)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         favPresenter.getFavTeams()
+        favPresenter.getNetworkState()
+        
     }
     
     
@@ -57,10 +62,14 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let teamDetailsSC = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
-       
-        teamDetailsSC.teamPressenter = favPresenter.navigateToDetalisScreen(sportName: "football", teamId: savedTeams[indexPath.row].savedTeamId)
-        self.navigationController?.pushViewController(teamDetailsSC, animated: true)
+        if(favPresenter.isOnline){
+            let teamDetailsSC = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
+            teamDetailsSC.teamPressenter = favPresenter.navigateToDetalisScreen(sportName: "football", teamId: savedTeams[indexPath.row].savedTeamId)
+            self.navigationController?.pushViewController(teamDetailsSC, animated: true)
+        }else{
+            showNoInternetAlert()
+            
+        }
     }
     
     
@@ -90,7 +99,12 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     
    
- 
+    func showNoInternetAlert(){
+        let noConncAlert : UIAlertController = UIAlertController(title: "NO Internet", message: "Please Check Your Connection and Try Again", preferredStyle: .alert)
+        noConncAlert.addAction(UIAlertAction(title: "Ok", style: .default ))
+        self.present(noConncAlert,animated: true,completion: nil)
+        
+    }
     
     
     

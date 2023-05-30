@@ -23,10 +23,7 @@ class NetworkService : NetworkServiceProtocol {
     let from = TimeConverter.getCurrentDate()
     let to =  TimeConverter.getFutureDate()
     let past = TimeConverter.getPastDate()
- 
-    
-    
-    
+
     func getAllLeagues(sportName:String,complition: @escaping ([League]?) -> Void ){
         let url = URL(string:firstPart+sportName+"/?met=Leagues&"+secondPart)
         let request = URLRequest(url: url!)

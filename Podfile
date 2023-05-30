@@ -9,6 +9,7 @@ target 'HeroApp' do
 pod 'lottie-ios'
 pod 'SDWebImage', '~> 5.0'
 pod 'Alamofire', '~> 5.0'
+pod 'ReachabilitySwift'
 
   target 'HeroAppTests' do
     inherit! :search_paths
