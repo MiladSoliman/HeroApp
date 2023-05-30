@@ -16,8 +16,15 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     var events : [LeagueDetalisView] = []
     var results : [LeagueDetalisView] = []
     var teams : [Team] = []
+    let networkIndicator=UIActivityIndicatorView(style: .large)
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        networkIndicator.color = UIColor.gray
+        networkIndicator.center = view.center
+        networkIndicator.startAnimating()
+       view.addSubview(networkIndicator)
         upcomingColliction.dataSource = self
         upcomingColliction.delegate = self
         resultTable.delegate = self
@@ -29,29 +36,42 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         presenter.getLastResults()
         presenter.getTeams()
         
+        
     }
     func updateUpComingColl(events: [LeagueDetalisView]) {
         self.events = events
         DispatchQueue.main.async {
-            self.upcomingColliction.reloadData()
+            if (events.count != 0) {
+                self.upcomingColliction.reloadData()
+            }else{
+                self.upcomingColliction.addSubview(self.createMyView())
+            }
         }
-       // print(events[0].event_away_team!) // real madrid
     }
     
     func updateResultTable(results: [LeagueDetalisView]) {
         self.results = results
         DispatchQueue.main.async {
-            self.resultTable.reloadData()
+            if(!results.isEmpty) {
+                self.resultTable.reloadData()
+                self.networkIndicator.stopAnimating()
+            }else{
+                self.resultTable.addSubview(self.createMyView())
+            }
         }
-      //  print(results[0].event_final_result!) // 4-0
     }
     
     func updateTeamsColl(teams: [Team]) {
         self.teams = teams
         DispatchQueue.main.async {
-            self.teamColliction.reloadData()
+            if (teams.count != 0 ) {
+                self.teamColliction.reloadData()
+            }else{
+                self.teamColliction.addSubview(self.createMyView())
+                
+            }
         }
-      //  print(teams[0].team_name!) // Byern
+    
     }
 
     
@@ -144,6 +164,24 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         
         self.present(ndDataAlert,animated: true,completion: nil)
         
+    }
+    
+    
+    func createMyView() -> UIView {
+ 
+        let myView = UIView(frame: CGRect(x: 0, y: 0, width: 375, height: 100))
+
+     
+        let myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 375, height: 100))
+        myLabel.text = "No Data Avaliable"
+        myLabel.textAlignment = .center
+        myLabel.textColor = .black
+        myLabel.font = UIFont(name: "HelveticaNeue", size: 20)
+
+        myView.addSubview(myLabel)
+
+       
+        return myView
     }
     
 
