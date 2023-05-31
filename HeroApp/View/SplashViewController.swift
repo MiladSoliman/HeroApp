@@ -12,6 +12,7 @@ class SplashViewController: UIViewController {
 
     @IBOutlet weak var splashView: UIView!
     
+    @IBOutlet weak var heroAppLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,21 +33,17 @@ class SplashViewController: UIViewController {
         }
         
         
+        heroAppLabel.alpha = 0
+        heroAppLabel.transform = CGAffineTransform(translationX: 0, y: 500)
+
+        UIView.animate(withDuration: 1, delay: 0.5, options: [.curveEaseInOut], animations: {
+            self.heroAppLabel.alpha = 1
+            self.heroAppLabel.transform = .identity
+        }, completion: nil)
+        
     
         
     }
-    
-  
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }

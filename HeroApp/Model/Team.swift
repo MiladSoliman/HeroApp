@@ -19,7 +19,6 @@ struct Team :Decodable {
     let team_logo:String?
     let players:[Player]?
     let coaches:[Coach]?
-    
 
 }
 struct Player:Decodable {

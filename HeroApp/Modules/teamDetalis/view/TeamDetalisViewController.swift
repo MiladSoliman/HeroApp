@@ -10,7 +10,8 @@ import UIKit
 class TeamDetalisViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,TeamDetalsProtocle {
  
     
-   
+    @IBOutlet weak var favBtn: UIButton!
+    
     @IBOutlet weak var playersTable: UITableView!
     @IBOutlet weak var teamCoach: UILabel!
     @IBOutlet weak var teamName: UILabel!
@@ -18,13 +19,23 @@ class TeamDetalisViewController: UIViewController,UITableViewDelegate,UITableVie
     var playes:[Player] = []
     var teams : [Team] = []
     var teamPressenter : TeamDeatlsPressenter!
+    var isAddedBefor : Bool = true
+    let networkIndicator=UIActivityIndicatorView(style: .large)
     override func viewDidLoad() {
         super.viewDidLoad()
         playersTable.dataSource = self
         playersTable.delegate = self
-    
+        networkIndicator.color = UIColor.gray
+        networkIndicator.center=view.center
+        networkIndicator.startAnimating()
+        view.addSubview(networkIndicator)
+        
         teamPressenter.attachView(view: self)
         teamPressenter.getTeamDetails()
+        if teamPressenter.isTeamInFav() {
+            favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            isAddedBefor = false
+        }
 
     }
 
@@ -34,8 +45,9 @@ class TeamDetalisViewController: UIViewController,UITableViewDelegate,UITableVie
         DispatchQueue.main.async {
             self.teamName.text = teams[0].team_name
             self.teamCoach.text = teams[0].coaches![0].coach_name
-            self.teamImgView.sd_setImage(with: URL(string: teams[0].team_logo ?? "FootBall"), placeholderImage: UIImage(named: "sport"))
+            self.teamImgView.sd_setImage(with: URL(string: teams[0].team_logo ?? "FootBall"), placeholderImage: UIImage(named: "FootBall"))
             self.playersTable.reloadData()
+            self.networkIndicator.stopAnimating()
         }
     }
     
@@ -68,9 +80,11 @@ class TeamDetalisViewController: UIViewController,UITableViewDelegate,UITableVie
     }
   
     @IBAction func addToFav(_ sender: UIButton) {
+        favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         addTeamToFav()
-        print("Added To Favorite")
-        showSavedAlert()
+        if isAddedBefor {
+            showSavedAlert()
+        }
      
     }
     

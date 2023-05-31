@@ -11,9 +11,10 @@ class LeagueDetalisPressenter {
     var leagueID :Int?
     var sportName:String?
     var teamId :Int?
+    var teamName:String?
     var networkService = NetworkService.getInstance()
     weak var view : LeagueDetailsProtocol!
-  //  var temp : [LeagueDetalisView] = []
+ 
     
     func setData(id:Int,name:String){
         self.leagueID = id
@@ -29,35 +30,28 @@ class LeagueDetalisPressenter {
         print("Hello From UpComing Method")
         print(leagueID! , sportName!)
        networkService.getUpComingEvents(sportName: sportName ?? "football" , id: leagueID ?? 3) { [weak self] upcomings in
-         //  self?.view.updateUpComingColl(events: upcomings ?? [])
            self?.setLeagueDetailsView(data: upcomings ?? [])
-       //    self?.view.updateUpComingColl(events: self!.temp)
-           
        }
     }
     
     func getLastResults(){
         networkService.getLastResult (sportName: sportName ?? "football" , id: leagueID ?? 3) { [weak self] lastresult in
             self?.setLeaguesResultView(result: lastresult ?? [])
-      //    self?.view.updateResultTable(results: temp)
+    
             
         }
     }
     
- func getTeams(){
-        networkService.getTeams(sportName: sportName ?? "football" , id: leagueID ?? 3){ [weak self] teams in
-         self?.view.updateTeamsColl(teams: teams ?? [])
-            print("Data in detalis presenter")
+    func getTeams(){
+            networkService.getTeams(sportName: sportName ?? "football" , id: leagueID ?? 3){ [weak self] teams in
+                self?.view.updateTeamsColl(teams: teams ?? [])
+                print("Data in detalis presenter")
+            }
         }
-    }
-    
-  
-    
-    
-    
+ 
     func setTeamDetailsData () -> TeamDeatlsPressenter {
         let teamPressenter = TeamDeatlsPressenter()
-        teamPressenter.setData(name: sportName!, id: teamId!)
+        teamPressenter.setData(name: sportName!, id: teamId! ,teamName: self.teamName!)
         return teamPressenter
     }
     

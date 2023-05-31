@@ -80,6 +80,28 @@ class TeamsDataBase {
        }
         
     }
+    
+    
+    func isFavTeam(teamName:String) -> Bool{
+        var isFav : Bool = false
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SavedTeam")
+        let predict = NSPredicate(format: "name=%@", teamName)
+        fetchRequest.predicate = predict
+        do{
+            let favTeams = try context.fetch(fetchRequest)
+            if(favTeams.count != 0){
+            
+                isFav = true
+            }else {
+                isFav = false
+            }
+        }catch{
+            print("Erorr")
+        }
+         return isFav
+     }
+    
+}
 
     
     
@@ -88,6 +110,6 @@ class TeamsDataBase {
     
     
     
-}
+
 
 

@@ -12,7 +12,7 @@ class FavoritePressenter {
     var cashingData = TeamsDataBase.getInstance()
     weak var favView : FavoriteProtocol!
     var isOnline : Bool!
-    
+    var teamName:String?
     
     func attachView(view : FavoriteProtocol){
         self.favView = view
@@ -31,7 +31,7 @@ class FavoritePressenter {
     
     func navigateToDetalisScreen(sportName:String , teamId:Int) -> TeamDeatlsPressenter {
         let teamDetalisP = TeamDeatlsPressenter()
-        teamDetalisP.setData(name: sportName, id: teamId)
+        teamDetalisP.setData(name: sportName, id: teamId , teamName: self.teamName!)
         return teamDetalisP
     }
     
@@ -39,6 +39,8 @@ class FavoritePressenter {
     func getNetworkState(){
        isOnline = NetworkConnection.checkConnection()
     }
+    
+  
     
     
 }

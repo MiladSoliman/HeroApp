@@ -118,6 +118,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         if collectionView == teamColliction {
             if presenter.sportName == "football"{
                 presenter.teamId = teams[indexPath.row].team_key
+                presenter.teamName = teams[indexPath.row].team_name
                 let detalisSc = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
                 
                 detalisSc.teamPressenter = presenter.setTeamDetailsData()

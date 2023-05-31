@@ -90,6 +90,13 @@ class LeaguesViewController: UIViewController,UITableViewDelegate, UITableViewDa
         return 80
     }
     
+    
+    
+    
+    
+    
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
      if isSeareched {
@@ -98,7 +105,7 @@ class LeaguesViewController: UIViewController,UITableViewDelegate, UITableViewDa
             leaguePresenter.leagueId = leageus[indexPath.row].league_key ?? 3
         }
         
-     //   print(leageus[indexPath.row].league_key)
+ 
        
             let LeagDetalisSc = self.storyboard?.instantiateViewController(identifier: "LeagueDetalis") as! LeagueDetailsViewController
         
@@ -122,8 +129,21 @@ class LeaguesViewController: UIViewController,UITableViewDelegate, UITableViewDa
                 filtterdLeagues.removeAll()
             }
             leaguesTable.reloadData()
-            
-        
-        
+      
     }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       
+        cell.alpha = 0
+        cell.transform = CGAffineTransform(translationX: -50, y: 0)
+        
+      
+        UIView.animate(withDuration: 0.3, delay: 0.05 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
+            cell.alpha = 1
+            cell.transform = .identity
+        }, completion: nil)
+    }
+    
+    
 }

@@ -9,4 +9,6 @@ import Foundation
 
 protocol LeaguesProtocol : AnyObject {
     func updateTable(leagues:[League])
+   
+    
 }

@@ -21,7 +21,7 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
        
         favPresenter = FavoritePressenter()
         favPresenter.attachView(view: self)
-        
+     
         
     }
     
@@ -63,6 +63,7 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(favPresenter.isOnline){
+            favPresenter.teamName = savedTeams[indexPath.row].savedTeamName
             let teamDetailsSC = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
             teamDetailsSC.teamPressenter = favPresenter.navigateToDetalisScreen(sportName: "football", teamId: savedTeams[indexPath.row].savedTeamId)
             self.navigationController?.pushViewController(teamDetailsSC, animated: true)
@@ -107,6 +108,19 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       
+        cell.alpha = 0
+        cell.transform = CGAffineTransform(translationX: -50, y: 0)
+        
+      
+        UIView.animate(withDuration: 0.3, delay: 0.05 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
+            cell.alpha = 1
+            cell.transform = .identity
+        }, completion: nil)
+    }
     
     
 
