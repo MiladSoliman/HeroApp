@@ -11,7 +11,7 @@ class FavoritePressenter {
     
     var cashingData = TeamsDataBase.getInstance()
     weak var favView : FavoriteProtocol!
-    var isOnline : Bool!
+   
     var teamName:String?
     
     func attachView(view : FavoriteProtocol){
@@ -36,8 +36,12 @@ class FavoritePressenter {
     }
     
     
-    func getNetworkState(){
-       isOnline = NetworkConnection.checkConnection()
+    func getNetworkState() -> Bool{
+        if ( NetworkConnection.checkConnection() ){
+            return true
+        }else{
+            return false
+        }
     }
     
   

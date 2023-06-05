@@ -8,15 +8,13 @@
 import Foundation
 
 class HomePressenter {
-    var isOnline : Bool!
-    
-    
-    
-    func getNetworkState() {
+   
+
+    func getNetworkState() -> Bool{
         if ( NetworkConnection.checkConnection() ){
-            isOnline = true
+            return true
         }else{
-            isOnline = false
+            return false
         }
     }
     

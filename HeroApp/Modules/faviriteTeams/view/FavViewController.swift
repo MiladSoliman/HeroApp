@@ -27,7 +27,7 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     override func viewWillAppear(_ animated: Bool) {
         favPresenter.getFavTeams()
-        favPresenter.getNetworkState()
+      
         
     }
     
@@ -62,7 +62,7 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(favPresenter.isOnline){
+        if(favPresenter.getNetworkState()){
             favPresenter.teamName = savedTeams[indexPath.row].savedTeamName
             let teamDetailsSC = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
             teamDetailsSC.teamPressenter = favPresenter.navigateToDetalisScreen(sportName: "football", teamId: savedTeams[indexPath.row].savedTeamId)
@@ -79,7 +79,10 @@ class FavViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             // Delete the row from the data source
             let teamName = savedTeams[indexPath.row].savedTeamName
             let deleteAlert : UIAlertController = UIAlertController(title: "Information", message: "Are You Sure You Want To Delete This Team ", preferredStyle: .alert)
-            deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default , handler: { _ in
+         
+          
+            
+            deleteAlert.addAction( UIAlertAction(title: "Yes", style: .default , handler: { _ in
                 self.deletMyFavTeam(name: teamName)
                 self.savedTeams.remove(at: indexPath.row)
                 self.favoriteTable.deleteRows(at: [indexPath], with: .left)

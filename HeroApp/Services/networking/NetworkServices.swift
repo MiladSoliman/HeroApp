@@ -16,8 +16,10 @@ class NetworkService : NetworkServiceProtocol {
     private init(){
         
     }
-    
-    
+    //7a3ff532ffb7c601002e854e557585a639777541cad290903bfe2649689476ba
+    //e97553b267bdf2f497c7cbefa750f788bda7aa5d4d2027cd095a93dda4bf5806
+
+
     var firstPart = "https://apiv2.allsportsapi.com/"
     var secondPart = "APIkey=7a3ff532ffb7c601002e854e557585a639777541cad290903bfe2649689476ba"
     let from = TimeConverter.getCurrentDate()

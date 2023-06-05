@@ -226,4 +226,14 @@ class LeagueDetalisPressenter {
     }
     
     
+    func getNetworkState() -> Bool {
+        if ( NetworkConnection.checkConnection() ){
+            return true
+        }else{
+            return false
+        }
+        
+    }
+
+    
 }

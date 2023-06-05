@@ -15,7 +15,7 @@ class HomeCollectionViewController: UICollectionViewController,UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         homePressenter = HomePressenter()
-        homePressenter.getNetworkState()
+    
     }
     
     var homeSports : [String] = ["FootBall","BasketBall","Tennis","Ckricket"]
@@ -66,7 +66,7 @@ class HomeCollectionViewController: UICollectionViewController,UICollectionViewD
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if (homePressenter.isOnline){
+        if (homePressenter.getNetworkState()){
             print(indexPath.row)
             let leaguesSC = storyboard?.instantiateViewController(identifier: "LeaguesScreen") as! LeaguesViewController
             leaguesSC.sportNum = indexPath.row

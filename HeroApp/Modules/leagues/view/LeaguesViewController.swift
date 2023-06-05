@@ -99,20 +99,25 @@ class LeaguesViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-     if isSeareched {
-            leaguePresenter.leagueId = filtterdLeagues[indexPath.row].league_key ?? 3
-        }else{
-            leaguePresenter.leagueId = leageus[indexPath.row].league_key ?? 3
-        }
-        
- 
-       
+        if(leaguePresenter.getNetworkState()){
+            
+            if isSeareched {
+                leaguePresenter.leagueId = filtterdLeagues[indexPath.row].league_key ?? 3
+            }else{
+                leaguePresenter.leagueId = leageus[indexPath.row].league_key ?? 3
+            }
+            
+            
+            
             let LeagDetalisSc = self.storyboard?.instantiateViewController(identifier: "LeagueDetalis") as! LeagueDetailsViewController
-        
-        LeagDetalisSc.presenter = leaguePresenter.getPressentr()
-        
+            
+            LeagDetalisSc.presenter = leaguePresenter.getPressentr()
+            
             self.navigationController?.pushViewController(LeagDetalisSc, animated: true)
-        
+        }else{
+            showNoInternetAlert()
+            
+        }
     }
     
     
@@ -145,5 +150,13 @@ class LeaguesViewController: UIViewController,UITableViewDelegate, UITableViewDa
         }, completion: nil)
     }
     
+    
+    
+    func showNoInternetAlert(){
+        let noConncAlert : UIAlertController = UIAlertController(title: "NO Internet", message: "Please Check Your Connection and Try Again", preferredStyle: .alert)
+        noConncAlert.addAction(UIAlertAction(title: "Ok", style: .default ))
+        self.present(noConncAlert,animated: true,completion: nil)
+        
+    }
     
 }

@@ -35,8 +35,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         presenter.getUpComingEvents()
         presenter.getLastResults()
         presenter.getTeams()
-        
-        
+
     }
     func updateUpComingColl(events: [LeagueDetalisView]) {
         self.events = events
@@ -57,6 +56,8 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
                 self.networkIndicator.stopAnimating()
             }else{
                 self.resultTable.addSubview(self.createMyView())
+                self.networkIndicator.stopAnimating()
+                
             }
         }
     }
@@ -64,7 +65,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     func updateTeamsColl(teams: [Team]) {
         self.teams = teams
         DispatchQueue.main.async {
-            if (teams.count != 0 ) {
+            if (teams.count != 0  ) {
                 self.teamColliction.reloadData()
             }else{
                 self.teamColliction.addSubview(self.createMyView())
@@ -115,19 +116,25 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == teamColliction {
-            if presenter.sportName == "football"{
-                presenter.teamId = teams[indexPath.row].team_key
-                presenter.teamName = teams[indexPath.row].team_name
-                let detalisSc = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
-                
-                detalisSc.teamPressenter = presenter.setTeamDetailsData()
-                
-                self.navigationController?.pushViewController(detalisSc, animated: true)
-            }else{
-                showAlert()
-                print("No Detalis")
+        if(presenter.getNetworkState()){
+            
+            if collectionView == teamColliction {
+                if presenter.sportName == "football"{
+                    presenter.teamId = teams[indexPath.row].team_key
+                    presenter.teamName = teams[indexPath.row].team_name
+                    let detalisSc = storyboard?.instantiateViewController(identifier: "TeamDetalis") as! TeamDetalisViewController
+                    
+                    detalisSc.teamPressenter = presenter.setTeamDetailsData()
+                    
+                    self.navigationController?.pushViewController(detalisSc, animated: true)
+                }else{
+                    showAlert()
+                    print("No Detalis")
+                }
             }
+        }else{
+            showNoInternetAlert()
+            
         }
         
     }
@@ -168,6 +175,9 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     
+    
+    
+    
     func createMyView() -> UIView {
  
         let myView = UIView(frame: CGRect(x: 0, y: 0, width: 375, height: 100))
@@ -185,5 +195,12 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         return myView
     }
     
-
+    
+    
+    func showNoInternetAlert(){
+        let noConncAlert : UIAlertController = UIAlertController(title: "NO Internet", message: "Please Check Your Connection and Try Again", preferredStyle: .alert)
+        noConncAlert.addAction(UIAlertAction(title: "Ok", style: .default ))
+        self.present(noConncAlert,animated: true,completion: nil)
+        
+    }
 }
